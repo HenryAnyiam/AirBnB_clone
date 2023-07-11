@@ -44,6 +44,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(bm1.random_arg, 'test')
 
     def test_str(self):
+        """ test str method """
 
         bm1 = BaseModel(id='123', rnd_arg='test')
         expctd_prnt = "[BaseModel] (123) {'id': '123',\
@@ -53,10 +54,26 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(str(bm1), expct_prnt)
 
     def test_save(self):
+        """ test save """
 
         bm1 = BaseModel()
         time.sleep(10)
         bm1.save()
         self.assertIsNotEqual(bm1.created_at.isoformat(),
-                            bm1.updated_at.isoformat())
+                              bm1.updated_at.isoformat())
 
+    def test_to_dict(self):
+        """ test to dict """
+
+        bm1 = BaseModel(id='123')
+        bm1.created_at = datetime.datetime(2023, 12, 01, 12, 56, 67)
+        bm1.updated_at = datetime.datetime(2023, 12, 01, 12, 56, 67)
+        bm1.rnd_attr = 'test'
+
+        expct_dict = {'id': '123',
+                      'created_at': '2023-12-01T12:56:67',
+                      'updated_at': '2023-12-01T12:56:67',
+                      'rnd_attr': 'test',
+                      '__class__': 'BaseModel'
+                      }
+        self.assertEqual(bm1.to_dict(), expct_dict)
