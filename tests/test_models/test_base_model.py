@@ -47,11 +47,11 @@ class TestBaseModel(unittest.TestCase):
         """ test str method """
 
         bm1 = BaseModel(id='123', rnd_arg='test')
-        expctd_prnt = "[BaseModel] (123) {'id': '123',
-                        'created_at': datetime.datetime(...),
-                        'updated_at': datetime.datetime(...),
+        expctd_prnt = "[BaseModel] (123) {'id': '123',\
+                        'created_at': datetime.datetime(...),\
+                        'updated_at': datetime.datetime(...),\
                         'rnd_arg': 'test'}"
-        self.assertEqual(str(bm1), expct_prnt)
+        self.assertEqual(str(bm1), expctd_prnt)
 
     def test_save(self):
         """ test save """
