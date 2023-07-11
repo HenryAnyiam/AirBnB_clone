@@ -7,6 +7,7 @@
 import unittest
 from models.base_model import BaseModel
 import datetime
+import time
 
 
 class TestBaseModel(unittest.TestCase):
@@ -41,3 +42,21 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(bm1.id, '123')
         self.assertEqual(bm1.created_at, date_iso)
         self.assertEqual(bm1.random_arg, 'test')
+
+    def test_str(self):
+
+        bm1 = BaseModel(id='123', rnd_arg='test')
+        expctd_prnt = "[BaseModel] (123) {'id': '123',\
+                        'created_at': datetime.datetime(...)\
+                        'updated_at': datetime.datetime(...)\
+                        'rnd_arg': 'test'}"
+        self.assertEqual(str(bm1), expct_prnt)
+
+    def test_save(self):
+
+        bm1 = BaseModel()
+        time.sleep(10)
+        bm1.save()
+        self.assertIsNotEqual(bm1.created_at.isoformat(),
+                            bm1.updated_at.isoformat())
+
