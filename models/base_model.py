@@ -20,3 +20,17 @@ class BaseModel:
             kwargs: dictionary containing attribute details
 
         """
+
+        if kwargs:
+            for key, value in kwargs.items():
+                if key == "__class__":
+                    pass
+                elif key == "created_at" or key == "updated_at":
+                    temp = datetime.datetime.fromisoformat(value)
+                    setattr(self, key, temp)
+                else:
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.datetime.today()
+            self.updated_at = datetime.datetime.today()
