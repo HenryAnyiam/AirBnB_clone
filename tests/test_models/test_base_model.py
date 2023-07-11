@@ -45,19 +45,23 @@ class TestBaseModel(unittest.TestCase):
 
     def test_str(self):
         """ test str method """
+        expctd_dict = {'created_at': datetime.datetime(2023, 7, 1, 12, 0, 0),
+                       'updated_at': datetime.datetime(2023, 7, 1, 12, 0, 0),
+                       'rnd_arg': 'test'}
+        bm1 = BaseModel(id='123',
+                        rnd_arg='test',
+                        created_at='2023-07-01T12:00:00',
+                        updated_at='2023-07-01T12:00:00',
+                        )
 
-        bm1 = BaseModel(id='123', rnd_arg='test')
-        expctd_prnt = ("[BaseModel] (123) {'id': '123',
-                        'created_at': datetime.datetime(...),
-                        'updated_at': datetime.datetime(...),\
-                        'rnd_arg': 'test'}")
+        expctd_prnt = f"[BaseModel] (123) {expctd_dict}"
         self.assertEqual(str(bm1), expctd_prnt)
 
     def test_save(self):
         """ test save """
 
         bm1 = BaseModel()
-        time.sleep(1)
+        time.sleep(0.1)
         bm1.save()
         self.assertNotEqual(bm1.created_at.isoformat(),
                               bm1.updated_at.isoformat())
@@ -66,13 +70,13 @@ class TestBaseModel(unittest.TestCase):
         """ test to dict """
 
         bm1 = BaseModel(id='123')
-        bm1.created_at = datetime.datetime(2023, 12, 1, 12, 56, 67)
-        bm1.updated_at = datetime.datetime(2023, 12, 1, 12, 56, 67)
+        bm1.created_at = datetime.datetime(2023, 12, 1, 12, 56, 57)
+        bm1.updated_at = datetime.datetime(2023, 12, 1, 12, 56, 57)
         bm1.rnd_attr = 'test'
 
         expct_dict = {'id': '123',
-                      'created_at': '2023-12-01T12:56:67',
-                      'updated_at': '2023-12-01T12:56:67',
+                      'created_at': '2023-12-01T12:56:57',
+                      'updated_at': '2023-12-01T12:56:57',
                       'rnd_attr': 'test',
                       '__class__': 'BaseModel'
                       }
