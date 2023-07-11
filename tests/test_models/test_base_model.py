@@ -45,9 +45,11 @@ class TestBaseModel(unittest.TestCase):
 
     def test_str(self):
         """ test str method """
-        expctd_dict = {'created_at': datetime.datetime(2023, 7, 1, 12, 0, 0),
-                       'updated_at': datetime.datetime(2023, 7, 1, 12, 0, 0),
-                       'rnd_arg': 'test'}
+        expctd_dict = {'id': '123',
+                       'rnd_arg': 'test',
+                       'created_at': datetime.datetime(2023, 7, 1, 12, 0, 0),
+                       'updated_at': datetime.datetime(2023, 7, 1, 12, 0, 0)
+                       }
         bm1 = BaseModel(id='123',
                         rnd_arg='test',
                         created_at='2023-07-01T12:00:00',
