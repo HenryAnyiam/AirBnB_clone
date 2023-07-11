@@ -66,8 +66,8 @@ class TestBaseModel(unittest.TestCase):
         """ test to dict """
 
         bm1 = BaseModel(id='123')
-        bm1.created_at = datetime.datetime(2023, 12, 01, 12, 56, 67)
-        bm1.updated_at = datetime.datetime(2023, 12, 01, 12, 56, 67)
+        bm1.created_at = datetime.datetime(2023, 12, 1, 12, 56, 67)
+        bm1.updated_at = datetime.datetime(2023, 12, 1, 12, 56, 67)
         bm1.rnd_attr = 'test'
 
         expct_dict = {'id': '123',
