@@ -47,10 +47,10 @@ class TestBaseModel(unittest.TestCase):
         """ test str method """
 
         bm1 = BaseModel(id='123', rnd_arg='test')
-        expctd_prnt = "[BaseModel] (123) {'id': '123',\
-                        'created_at': datetime.datetime(...),\
+        expctd_prnt = ("[BaseModel] (123) {'id': '123',
+                        'created_at': datetime.datetime(...),
                         'updated_at': datetime.datetime(...),\
-                        'rnd_arg': 'test'}"
+                        'rnd_arg': 'test'}")
         self.assertEqual(str(bm1), expctd_prnt)
 
     def test_save(self):
@@ -59,7 +59,7 @@ class TestBaseModel(unittest.TestCase):
         bm1 = BaseModel()
         time.sleep(1)
         bm1.save()
-        self.assertIsNotEqual(bm1.created_at.isoformat(),
+        self.assertNotEqual(bm1.created_at.isoformat(),
                               bm1.updated_at.isoformat())
 
     def test_to_dict(self):
