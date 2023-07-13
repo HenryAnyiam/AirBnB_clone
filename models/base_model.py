@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 
-"""module with creation of BaseModel classdefines common attributes/methods for
- every other class in the AirBnB console"""
+"""module with creation of BaseModel class"""
 
 import json
 import uuid
 import datetime
+import models
 
 
 class BaseModel:
@@ -40,6 +40,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.datetime.today()
             self.updated_at = datetime.datetime.today()
+            models.storage.new(self)
 
     def __str__(self):
         """print string representation of class instance"""
@@ -50,6 +51,7 @@ class BaseModel:
         """updates updated_at with current time after changes"""
 
         self.updated_at = datetime.datetime.today()
+        models.storage.save()
 
     def to_dict(self):
         """returns a serialized objext of class instance"""

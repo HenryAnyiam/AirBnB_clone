@@ -63,7 +63,7 @@ class TestBaseModel(unittest.TestCase):
         """ test save """
 
         bm1 = BaseModel()
-        time.sleep(0.1)
+        time.sleep(0.01)
         bm1.save()
         self.assertNotEqual(bm1.created_at.isoformat(),
                               bm1.updated_at.isoformat())
