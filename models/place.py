@@ -21,6 +21,7 @@ class Place(BaseModel):
         self.price_by__night = 0
         self.latitude = 0.0
         self.longitude = 0.0
+        self.price_by_night = 0
         self.amenity_ids = []
 
         BaseModel.__init__(self, *args, **kwargs)
