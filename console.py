@@ -31,6 +31,11 @@ class HBNBCommand(cmd.Cmd):
         """
         return True
 
+    def default(self, line):
+        """overwrites base class default
+        handles commands not found"""
+        print(line)
+
     def emptyline(self):
         """overwrites Base Class method
         executes nothing when line is empty"""
@@ -124,7 +129,7 @@ class HBNBCommand(cmd.Cmd):
         elif (len(args) > 1) and (".".join(args[:2]) not in objs.keys()):
             print("** no instance found **")
         elif len(args) < 4:
-            for i in range(3):
+            for i in range(4):
                 if len(args) == i:
                     print(errors[i])
         else:
