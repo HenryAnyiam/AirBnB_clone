@@ -9,6 +9,7 @@ from console import HBNBCommand
 from unittest.mock import patch
 from models.base_model import BaseModel
 
+
 class HBNBCommandTesCase(unittest.TestCase):
     def setUp(self):
         self.console = HBNBCommand()
@@ -36,17 +37,16 @@ class HBNBCommandTesCase(unittest.TestCase):
             self.console.onecmd('create MyModel')
             output = fake_out.getvalue().strip()
             self.assertEqual(output, "** class doesn't exist **")
-            
 
     def test_show(self):
         model = BaseModel()
         storage.new(model)
         model.save()
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.console.onecmd(f'show BaseModel {model.id}' )
+            self.console.onecmd(f'show BaseModel {model.id}')
             output = fake_out.getvalue().strip()
             self.assertEqual(output, str(model))
-    
+
     def test_show_non_existent_class(self):
         with patch('sys.stdout', new=StringIO()) as fake_out:
             self.console.onecmd('show BaseName')
@@ -64,7 +64,7 @@ class HBNBCommandTesCase(unittest.TestCase):
             self.console.onecmd('show BaseModel')
             output = fake_out.getvalue().strip()
             self.assertEqual(output, "** instance id missing **")
-    
+
     def test_show_non_existance(self):
         with patch('sys.stdout', new=StringIO()) as fake_out:
             self.console.onecmd('show BaseModel 121212')
@@ -105,7 +105,6 @@ class HBNBCommandTesCase(unittest.TestCase):
             output = fake_out.getvalue().strip()
             self.assertEqual(output, "** no instance found **")
 
-
     def test_all(self):
         obj1 = BaseModel()
         obj2 = BaseModel()
@@ -131,7 +130,7 @@ class HBNBCommandTesCase(unittest.TestCase):
         obj.save()
         with patch('sys.stdout', new=StringIO()) as fake_out:
             self.console.onecmd('update BaseModel {} email "airbnb.gmail.com"'
-                    .format(obj.id))
+                                .format(obj.id))
             output = fake_out.getvalue().strip()
             self.assertEqual('', output)
             self.assertEqual(obj.email, "airbnb.gmail.com")
@@ -178,5 +177,7 @@ class HBNBCommandTesCase(unittest.TestCase):
             self.console.onecmd('update BaseModel {} email'.format(obj.id))
             output = fake_out.getvalue().strip()
             self.assertEqual(output, '** value missing **')
+
+
 if __name__ == '__main__':
     unittest.main()
