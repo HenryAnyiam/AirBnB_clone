@@ -81,5 +81,102 @@ class HBNBCommandTesCase(unittest.TestCase):
             self.assertEqual('', output)
             self.assertNotIn(obj.id, storage.all())
 
+    def test_destroy_missing_class_name(self):
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('destroy')
+            output = fake_out.getvalue().strip()
+            self.assertEqual(output, "** class name missing **")
+
+    def test_destroy_missing_id(self):
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('destroy BaseModel')
+            output = fake_out.getvalue().strip()
+            self.assertEqual(output, "** instance id missing **")
+
+    def test_destrooy_non_existent_className(self):
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('destroy MyModel')
+            output = fake_out.getvalue().strip()
+            self.assertEqual(output, "** class doesn't exist **")
+
+    def test_destroy_wrong_id(self):
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('destroy BaseModel 121212')
+            output = fake_out.getvalue().strip()
+            self.assertEqual(output, "** no instance found **")
+
+
+    def test_all(self):
+        obj1 = BaseModel()
+        obj2 = BaseModel()
+        storage.new(obj1)
+        storage.new(obj2)
+        obj1.save()
+        obj2.save()
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('all BaseModel')
+            output = fake_out.getvalue().strip()
+            self.assertIn(str(obj1), output)
+            self.assertIn(str(obj2), output)
+
+    def test_all_class_missing(self):
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('all MyModel')
+            output = fake_out.getvalue().strip()
+            self.assertEqual(output, "** class doesn't exist **")
+
+    def test_update(self):
+        obj = BaseModel()
+        storage.new(obj)
+        obj.save()
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('update BaseModel {} email "airbnb.gmail.com"'
+                    .format(obj.id))
+            output = fake_out.getvalue().strip()
+            self.assertEqual('', output)
+            self.assertEqual(obj.email, "airbnb.gmail.com")
+            self.assertTrue(hasattr(obj, 'updated_at'))
+
+    def test_update_non_existent(self):
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('update MyModel')
+            output = fake_out.getvalue().strip()
+            self.assertEqual(output, "** class doesn't exist **")
+
+    def test_update_missing_class_name(self):
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('update')
+            output = fake_out.getvalue().strip()
+            self.assertEqual(output, "** class name missing **")
+
+    def test_update_missing_id(self):
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('update BaseModel')
+            output = fake_out.getvalue().strip()
+            self.assertEqual(output, "** instance id missing **")
+
+    def test_update_non_existent_class(self):
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('update BaseModel 121212')
+            output = fake_out.getvalue().strip()
+            self.assertEqual(output, "** no instance found **")
+
+    def test_update_missing_attr(self):
+        obj = BaseModel()
+        storage.new(obj)
+        obj.save()
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('update BaseModel {}'.format(obj.id))
+            output = fake_out.getvalue().strip()
+            self.assertEqual(output, "** attribute name missing **")
+
+    def test_update_missing_value(self):
+        obj = BaseModel()
+        storage.new(obj)
+        obj.save()
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('update BaseModel {} email'.format(obj.id))
+            output = fake_out.getvalue().strip()
+            self.assertEqual(output, '** value missing **')
 if __name__ == '__main__':
     unittest.main()
