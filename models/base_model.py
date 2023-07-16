@@ -13,7 +13,7 @@ Attributes:
 Methods:
     BaseModel.__init__(*args, **kwargs):
         Initialization method for BaseModel instances.
-    
+
     BaseModel.__str__():
         Returns a string representation of a BaseModel instance.
 
