@@ -11,6 +11,6 @@ class Amenity(BaseModel):
 
     def __init__(self, *args, **kwargs):
         """initialization of class Amenity"""
-        """ self.name = "" """
+        self.name = ""
 
         BaseModel.__init__(self, *args, **kwargs)

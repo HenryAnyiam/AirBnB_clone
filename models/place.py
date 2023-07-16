@@ -11,7 +11,7 @@ class Place(BaseModel):
 
     def __init__(self, *args, **kwargs):
         """initialization of class Place"""
-        """ self.name = ""
+        self.name = ""
         self.city_id = ""
         self.user_id = ""
         self.description = ""
@@ -21,6 +21,6 @@ class Place(BaseModel):
         self.latitude = 0.0
         self.longitude = 0.0
         self.price_by_night = 0
-        self.amenity_ids = [] """
+        self.amenity_ids = []
 
         BaseModel.__init__(self, *args, **kwargs)
