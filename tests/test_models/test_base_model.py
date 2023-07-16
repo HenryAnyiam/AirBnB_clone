@@ -11,8 +11,8 @@ import time
 
 
 class TestBaseModel(unittest.TestCase):
-    """Test class for the id attribute ensuring that the id are unique and
-        correctly formatted."""
+    """Test class for the id attribute ensuring that
+        the id are unique and correctly formatted."""
 
     def test_uuid(self):
         """ tests cases to the the id of the BaseModel class """
