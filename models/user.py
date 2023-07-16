@@ -11,13 +11,9 @@ class User(BaseModel):
 
     def __init__(self, *args, **kwargs):
         """initialization of class User"""
-        """self.email = str
-           self.password = str
-           self.first_name = str
-           self.last_name = str """
-        self.email = ""
+        """self.email = ""
         self.password = ""
         self.first_name = ""
-        self.last_name = ""
+        self.last_name = "" """
 
         BaseModel.__init__(self, *args, **kwargs)
