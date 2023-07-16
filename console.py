@@ -53,7 +53,26 @@ class HBNBCommand(cmd.Cmd):
                 command = " ".join(command)
                 for key in comms.keys():
                     if comm == key:
-                        comms[key](command)
+                        if key == "update":
+                            new = eval(line[c_end:end + 1])
+                            check = 0
+                            dic = {}
+                            if isinstance(new, tuple) or isinstance(new, str):
+                                for i in new:
+                                    if isinstance(i, dict):
+                                        dic = i
+                                        check = 1
+                            if check == 0 or not isinstance(new[0], str):
+                                comms[key](command)
+                            else:
+                                for i in dic.keys():
+                                    command = line[0:c_start]
+                                    command += " " + new[0]
+                                    command += " " + i
+                                    command += " " + dic[i]
+                                    comms[key](command)
+                        else:
+                            comms[key](command)
                 if comm not in comms.keys():
                     cmd.Cmd.default(self, line)
             else:
@@ -171,6 +190,7 @@ class HBNBCommand(cmd.Cmd):
         objs = storage.all()
         if len(args) >= 2:
             args[1] = args[1].strip('"')
+        if len(args) > 2:
             args[2] = args[2].strip('"')
         if (len(args) > 0) and (args[0] not in self.__class):
             print("** class doesn't exist **")
