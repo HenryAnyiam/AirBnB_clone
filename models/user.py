@@ -11,8 +11,10 @@ class User(BaseModel):
 
     def __init__(self, *args, **kwargs):
         """initialization of class User"""
-        """args = unused oarameter
-           kwargs = dictionary with due arhs"""
+        """self.email = str
+           self.password = str
+           self.first_name = str
+           self.last_name = str """
         self.email = ""
         self.password = ""
         self.first_name = ""
