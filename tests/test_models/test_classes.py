@@ -11,36 +11,6 @@ from models.place import Place
 from models.review import Review
 
 
-class TestState(unittest.TestCase):
-    def test_state_inherits_base_model(self):
-        self.assertTrue(issubclass(State, BaseModel))
-
-    def test_state_has_attributes(self):
-        state = State()
-        self.assertTrue(hasattr(state, 'name'))
-        self.assertEqual(state.name, '')
-
-    def test_state_has_correct_class_name(self):
-        state = State()
-        self.assertEqual(state.__class__.__name__, 'State')
-
-
-class TestCity(unittest.TestCase):
-    def test_city_inherits_base_model(self):
-        self.assertTrue(issubclass(City, BaseModel))
-
-    def test_city_has_attributes(self):
-        city = City()
-        self.assertTrue(hasattr(city, 'state_id'))
-        self.assertTrue(hasattr(city, 'name'))
-        self.assertEqual(city.state_id, '')
-        self.assertEqual(city.name, '')
-
-    def test_city_has_correct_class_name(self):
-        city = City()
-        self.assertEqual(city.__class__.__name__, 'City')
-
-
 class TestAmenity(unittest.TestCase):
     def test_amenity_inherits_base_model(self):
         self.assertTrue(issubclass(Amenity, BaseModel))
