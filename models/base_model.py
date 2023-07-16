@@ -24,6 +24,7 @@ Methods:
         Returns a dictionary representation of a BaseModel instance.
 """
 
+
 import json
 import uuid
 import datetime
