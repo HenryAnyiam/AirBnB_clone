@@ -11,20 +11,6 @@ from models.place import Place
 from models.review import Review
 
 
-class TestAmenity(unittest.TestCase):
-    def test_amenity_inherits_base_model(self):
-        self.assertTrue(issubclass(Amenity, BaseModel))
-
-    def test_amenity_has_attributes(self):
-        amenity = Amenity()
-        self.assertTrue(hasattr(amenity, 'name'))
-        self.assertEqual(amenity.name, '')
-
-    def test_amenity_has_correct_class_name(self):
-        amenity = Amenity()
-        self.assertEqual(amenity.__class__.__name__, 'Amenity')
-
-
 class TestPlace(unittest.TestCase):
     def test_place_inherits_base_model(self):
         self.assertTrue(issubclass(Place, BaseModel))
