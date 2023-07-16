@@ -44,6 +44,7 @@ class HBNBCommand(cmd.Cmd):
                 comms = {"all": self.do_all,
                          "count": self.do_count,
                          "show": self.do_show,
+                         "destroy": self.do_destroy,
                          "update": self.do_update}
                 command = [line[0:c_start]]
                 if (end - c_end) > 1:
