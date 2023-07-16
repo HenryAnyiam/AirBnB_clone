@@ -11,6 +11,6 @@ class State(BaseModel):
 
     def __init__(self, *args, **kwargs):
         """initialization of class State"""
-        self.name = ""
+        """self.name = "" """
 
         BaseModel.__init__(self, *args, **kwargs)

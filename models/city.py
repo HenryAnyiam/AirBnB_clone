@@ -11,7 +11,7 @@ class City(BaseModel):
 
     def __init__(self, *args, **kwargs):
         """initialization of class City"""
-        self.name = ""
-        self.state_id = ""
+        """ self.name = ""
+        self.state_id = "" """
 
         BaseModel.__init__(self, *args, **kwargs)
