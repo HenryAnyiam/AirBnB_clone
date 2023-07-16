@@ -34,7 +34,31 @@ class HBNBCommand(cmd.Cmd):
     def default(self, line):
         """overwrites base class default
         handles commands not found"""
-        print(line)
+
+        if ("." and "(" and ")") in line:
+            c_start = line.index(".")
+            c_end = line.index("(")
+            end = len(line) - 1
+            if c_start < c_end and line[end] == ")":
+                comm = line[(c_start + 1):c_end]
+                comms = {"all": self.do_all,
+                         "count": self.do_count,
+                         "show": self.do_show,
+                         "update": self.do_update}
+                command = [line[0:c_start]]
+                if (end - c_end) > 1:
+                    hold = line[c_end + 1:end].split(", ")
+                    command += hold
+                command = " ".join(command)
+                for key in comms.keys():
+                    if comm == key:
+                        comms[key](command)
+                if comm not in comms.keys():
+                    cmd.Cmd.default(self, line)
+            else:
+                cmd.Cmd.default(self, line)
+        else:
+            cmd.Cmd.default(self, line)
 
     def emptyline(self):
         """overwrites Base Class method
@@ -70,6 +94,7 @@ class HBNBCommand(cmd.Cmd):
             elif len(args) < 2:
                 print("** instance id missing **")
             else:
+                args[1] = args[1].strip('"')
                 key = ".".join(args)
                 objs = storage.all()
                 if key in objs.keys():
@@ -90,6 +115,7 @@ class HBNBCommand(cmd.Cmd):
             elif len(args) < 2:
                 print("** instance id missing **")
             else:
+                args[1] = args[1].strip('"')
                 key = ".".join(args)
                 objs = storage.all()
                 if key in objs.keys():
@@ -116,6 +142,24 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** class doesn't exist **")
 
+    def do_count(self, line):
+        """prints number of instances of
+        a particular class"""
+
+        if len(line) == 0:
+            print("** class name missing **")
+        else:
+            args = line.split()
+            if args[0] not in self.__class:
+                print("** class doesn't exist **")
+            else:
+                objs = storage.all()
+                i_num = 0
+                for key in objs.keys():
+                    if line in key:
+                        i_num += 1
+                print(i_num)
+
     def do_update(self, line):
         """updates/adds an instance attribute based on the
         class nane and ID and saves the changes"""
@@ -124,6 +168,9 @@ class HBNBCommand(cmd.Cmd):
         errors = ["** class name missing **", "** instance id missing **",
                   "** attribute name missing **", "** value missing **"]
         objs = storage.all()
+        if len(args) >= 2:
+            args[1] = args[1].strip('"')
+            args[2] = args[2].strip('"')
         if (len(args) > 0) and (args[0] not in self.__class):
             print("** class doesn't exist **")
         elif (len(args) > 1) and (".".join(args[:2]) not in objs.keys()):
