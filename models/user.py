@@ -13,3 +13,7 @@ class User(BaseModel):
         """initialization of class User"""
 
         BaseModel.__init__(self, *args, **kwargs)
+        self.email = ''
+        self.password = ''
+        self.first_name = ''
+        self.last_name = ''
