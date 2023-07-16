@@ -9,10 +9,11 @@ class Review(BaseModel):
     """building class Review that inherits
     from class BaseModel"""
 
+    text = ""
+    place_id = ""
+    user_id = ""
+
     def __init__(self, *args, **kwargs):
         """initialization of class Review"""
-        self.text = ""
-        self.place_id = ""
-        self.user_id = ""
 
         BaseModel.__init__(self, *args, **kwargs)

@@ -9,8 +9,9 @@ class Amenity(BaseModel):
     """building class Amenity that inherits
     from class BaseModel"""
 
+    name = ""
+
     def __init__(self, *args, **kwargs):
         """initialization of class Amenity"""
-        self.name = ""
 
         BaseModel.__init__(self, *args, **kwargs)
