@@ -12,6 +12,7 @@ from models.review import Review
 
 
 class TestReview(unittest.TestCase):
+    """ test review attributes and that review is subclass of BaseModel """
     def test_review_inherits_base_model(self):
         self.assertTrue(issubclass(Review, BaseModel))
 
