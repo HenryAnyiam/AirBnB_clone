@@ -1,6 +1,28 @@
 #!/usr/bin/python3
 
-"""module with creation of BaseModel class"""
+
+"""
+AirBnB Console - BaseModel Module
+
+This module contains the definition of the BaseModel class,
+which serves as the base class for other classes in the AirBnB console.
+
+Attributes:
+    None
+
+Methods:
+    BaseModel.__init__(*args, **kwargs):
+        Initialization method for BaseModel instances.
+    
+    BaseModel.__str__():
+        Returns a string representation of a BaseModel instance.
+
+    BaseModel.save():
+        Updates the updated_at attribute and saves the instance.
+
+    BaseModel.to_dict():
+        Returns a dictionary representation of a BaseModel instance.
+"""
 
 import json
 import uuid
