@@ -68,8 +68,8 @@ class HBNBCommand(cmd.Cmd):
                                 for i in dic.keys():
                                     command = line[0:c_start]
                                     command += " " + new[0]
-                                    command += " " + i
-                                    command += " " + dic[i]
+                                    command += " " + str(i)
+                                    command += " " + str(dic[i])
                                     comms[key](command)
                         else:
                             comms[key](command)
