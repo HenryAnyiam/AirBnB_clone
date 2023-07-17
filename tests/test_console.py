@@ -8,6 +8,12 @@ from models import storage
 from console import HBNBCommand
 from unittest.mock import patch
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 
 
 class HBNBCommandTesCase(unittest.TestCase):
@@ -109,15 +115,58 @@ class HBNBCommandTesCase(unittest.TestCase):
     def test_all(self):
         obj1 = BaseModel()
         obj2 = BaseModel()
+        U_obj = User()
+        S_obj = State()
+        C_obj = City()
+        A_obj = Amenity()
+        P_obj = Place()
+        R_obj = Review()
         storage.new(obj1)
         storage.new(obj2)
+        storage.new(U_obj)
+        storage.new(S_obj)
+        storage.new(C_obj)
+        storage.new(A_obj)
+        storage.new(P_obj)
+        storage.new(R_obj)
         obj1.save()
         obj2.save()
+        U_obj.save()
+        S_obj.save()
+        C_obj.save()
+        A_obj.save()
+        P_obj.save()
+        R_obj.save()
         with patch('sys.stdout', new=StringIO()) as fake_out:
             self.console.onecmd('all BaseModel')
             output = fake_out.getvalue().strip()
             self.assertIn(str(obj1), output)
             self.assertIn(str(obj2), output)
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('BaseModel.all()')
+            output = fake_out.getvalue().strip()
+            self.assertIn(str(obj1), output)
+            self.assertIn(str(obj2), output)
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('User.all()')
+            output = fake_out.getvalue().strip()
+            self.assertIn(str(U_obj), output)
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('State.all()')
+            output = fake_out.getvalue().strip()
+            self.assertIn(str(S_obj), output)
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('Amenity.all()')
+            output = fake_out.getvalue().strip()
+            self.assertIn(str(A_obj), output)
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('Place.all()')
+            output = fake_out.getvalue().strip()
+            self.assertIn(str(P_obj), output)
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('Review.all()')
+            output = fake_out.getvalue().strip()
+            self.assertIn(str(R_obj), output)
 
     def test_all_class_missing(self):
         with patch('sys.stdout', new=StringIO()) as fake_out:
