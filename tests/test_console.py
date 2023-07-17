@@ -80,13 +80,69 @@ class HBNBCommandTesCase(unittest.TestCase):
 
     def test_destroy(self):
         obj = BaseModel()
+        B_obj = BaseModel()
+        U_obj = User()
+        S_obj = State()
+        C_obj = City()
+        A_obj = Amenity()
+        R_obj = Review()
+        P_obj = Place()
         storage.new(obj)
+        storage.new(U_obj)
+        storage.new(S_obj)
+        storage.new(C_obj)
+        storage.new(A_obj)
+        storage.new(R_obj)
+        storage.new(P_obj)
+        storage.new(B_obj)
         obj.save()
+        B_obj.save()
+        U_obj.save()
+        S_obj.save()
+        C_obj.save()
+        A_obj.save()
+        P_obj.save()
+        R_obj.save()
         with patch('sys.stdout', new=StringIO()) as fake_out:
             self.console.onecmd('destroy BaseModel {}'.format(obj.id))
             output = fake_out.getvalue().strip()
             self.assertEqual('', output)
             self.assertNotIn(obj.id, storage.all())
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('BaseModel.destroy({})'.format(B_obj.id))
+            output = fake_out.getvalue().strip()
+            self.assertEqual('', output)
+            self.assertNotIn(B_obj.id, storage.all())
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('User.destroy({})'.format(U_obj.id))
+            output = fake_out.getvalue().strip()
+            self.assertEqual('', output)
+            self.assertNotIn(U_obj.id, storage.all())
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('State.destroy({})'.format(S_obj.id))
+            output = fake_out.getvalue().strip()
+            self.assertEqual('', output)
+            self.assertNotIn(S_obj.id, storage.all())
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('City.destroy({})'.format(C_obj.id))
+            output = fake_out.getvalue().strip()
+            self.assertEqual('', output)
+            self.assertNotIn(C_obj.id, storage.all())
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('Place.destroy({})'.format(P_obj.id))
+            output = fake_out.getvalue().strip()
+            self.assertEqual('', output)
+            self.assertNotIn(C_obj.id, storage.all())
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('Review.destroy({})'.format(R_obj.id))
+            output = fake_out.getvalue().strip()
+            self.assertEqual('', output)
+            self.assertNotIn(C_obj.id, storage.all())
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('Amenity.destroy({})'.format(A_obj.id))
+            output = fake_out.getvalue().strip()
+            self.assertEqual('', output)
+            self.assertNotIn(A_obj.id, storage.all())
 
     def test_destroy_missing_class_name(self):
         with patch('sys.stdout', new=StringIO()) as fake_out:

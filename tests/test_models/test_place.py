@@ -45,5 +45,6 @@ class TestPlace(unittest.TestCase):
         place = Place()
         self.assertEqual(place.__class__.__name__, 'Place')
 
+
 if __name__ == "__main__":
     unittest.main()
