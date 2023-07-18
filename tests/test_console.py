@@ -339,6 +339,24 @@ class HBNBCommandTesCase(unittest.TestCase):
         obj = BaseModel()
         storage.new(obj)
         obj.save()
+        Sobj = State()
+        Cobj = City()
+        Pobj = Place()
+        Robj = Review()
+        Aobj = Amenity()
+        Uobj = User()
+        storage.new(Sobj)
+        storage.new(Cobj)
+        storage.new(Pobj)
+        storage.new(Robj)
+        storage.new(Aobj)
+        storage.new(Uobj)
+        Sobj.save()
+        Cobj.save()
+        Pobj.save()
+        Robj.save()
+        Aobj.save()
+        Uobj.save()
         with patch('sys.stdout', new=StringIO()) as fake_out:
             self.console.onecmd('update BaseModel {} email "airbnb.gmail.com"'
                                 .format(obj.id))
@@ -346,6 +364,11 @@ class HBNBCommandTesCase(unittest.TestCase):
             self.assertEqual('', output)
             self.assertEqual(obj.email, "airbnb.gmail.com")
             self.assertTrue(hasattr(obj, 'updated_at'))
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd(f'BaseModel.update("{obj.id}" "email" "hbnb.gmail.com")')
+            output = fake_out.getvalue().strip()
+            self.assertEqual('', output)
+            self.assertEqual(obj.email, "hbnb.gmail.com")
 
     def test_update_non_existent(self):
         with patch('sys.stdout', new=StringIO()) as fake_out:
