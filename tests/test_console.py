@@ -2,6 +2,7 @@
 """ console test cases """
 
 
+import os
 import unittest
 from io import StringIO
 from models import storage
@@ -23,6 +24,9 @@ class HBNBCommandTesCase(unittest.TestCase):
 
     def tearDown(self):
         storage._FileStorage__objects = {}
+
+    def test_quit(self):
+        self.assertTrue(self.console.onecmd('quit'))
 
     def test_create(self):
         with patch('sys.stdout', new=StringIO()) as fake_out:
@@ -275,6 +279,61 @@ class HBNBCommandTesCase(unittest.TestCase):
             self.console.onecmd('all MyModel')
             output = fake_out.getvalue().strip()
             self.assertEqual(output, "** class doesn't exist **")
+
+    def test_count(self):
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        Bobj = BaseModel()
+        storage.new(Bobj)
+        Bobj.save()
+        Sobj = State()
+        Cobj = City()
+        Pobj = Place()
+        Robj = Review()
+        Aobj = Amenity()
+        Uobj = User()
+        storage.new(Sobj)
+        storage.new(Cobj)
+        storage.new(Pobj)
+        storage.new(Robj)
+        storage.new(Aobj)
+        storage.new(Uobj)
+        Sobj.save()
+        Cobj.save()
+        Pobj.save()
+        Robj.save()
+        Aobj.save()
+        Uobj.save()
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('BaseModel.count()')
+            output = fake_out.getvalue().strip()
+            self.assertEqual('1', output)
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('User.count()')
+            output = fake_out.getvalue().strip()
+            self.assertEqual('1', output)
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('State.count()')
+            output = fake_out.getvalue().strip()
+            self.assertEqual('1', output)
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('City.count()')
+            output = fake_out.getvalue().strip()
+            self.assertEqual('1', output)
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('Place.count()')
+            output = fake_out.getvalue().strip()
+            self.assertEqual('1', output)
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('Amenity.count()')
+            output = fake_out.getvalue().strip()
+            self.assertEqual('1', output)
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('Review.count()')
+            output = fake_out.getvalue().strip()
+            self.assertEqual('1', output)
 
     def test_update(self):
         obj = BaseModel()
