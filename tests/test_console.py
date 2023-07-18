@@ -53,6 +53,10 @@ class HBNBCommandTesCase(unittest.TestCase):
             self.console.onecmd(f'show BaseModel {model.id}')
             output = fake_out.getvalue().strip()
             self.assertEqual(output, str(model))
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd(f'BaseModel.show("{model.id}")')
+            output = fake_out.getvalue().strip()
+            self.assertEqual(output, str(model))
 
     def test_show_non_existent_class(self):
         with patch('sys.stdout', new=StringIO()) as fake_out:
