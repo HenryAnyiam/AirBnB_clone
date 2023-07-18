@@ -49,6 +49,24 @@ class HBNBCommandTesCase(unittest.TestCase):
         model = BaseModel()
         storage.new(model)
         model.save()
+        Smodel = State()
+        Cmodel = City()
+        Pmodel = Place()
+        Rmodel = Review()
+        Amodel = Amenity()
+        Umodel = User()
+        storage.new(Smodel)
+        storage.new(Cmodel)
+        storage.new(Pmodel)
+        storage.new(Rmodel)
+        storage.new(Amodel)
+        storage.new(Umodel)
+        Smodel.save()
+        Pmodel.save()
+        Cmodel.save()
+        Rmodel.save()
+        Amodel.save()
+        Umodel.save()
         with patch('sys.stdout', new=StringIO()) as fake_out:
             self.console.onecmd(f'show BaseModel {model.id}')
             output = fake_out.getvalue().strip()
@@ -57,6 +75,30 @@ class HBNBCommandTesCase(unittest.TestCase):
             self.console.onecmd(f'BaseModel.show("{model.id}")')
             output = fake_out.getvalue().strip()
             self.assertEqual(output, str(model))
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd(f'User.show("{Umodel.id}")')
+            output = fake_out.getvalue().strip()
+            self.assertEqual(output, str(Umodel))
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd(f'State.show("{Smodel.id}")')
+            output = fake_out.getvalue().strip()
+            self.assertEqual(output, str(Smodel))
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd(f'City.show("{Cmodel.id})')
+            output = fake_out.getvalue().strip()
+            self.assertEqual(output, str(Cmodel))
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd(f'Amenity.show("{Amodel.id}")')
+            output = fake_out.getvalue().strip()
+            self.assertEqual(output, str(Amodel))
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd(f'Place.show("{Pmodel.id}")')
+            output = fake_out.getvalue().strip()
+            self.assertEqual(output, str(Pmodel))
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd(f'Review.show("{Rmodel.id}")')
+            output = fake_out.getvalue().strip()
+            self.assertEqual(output, str(Rmodel))
 
     def test_show_non_existent_class(self):
         with patch('sys.stdout', new=StringIO()) as fake_out:
@@ -113,37 +155,37 @@ class HBNBCommandTesCase(unittest.TestCase):
             self.assertEqual('', output)
             self.assertNotIn(obj.id, storage.all())
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.console.onecmd('BaseModel.destroy("{}")'.format(B_obj.id))
+            self.console.onecmd(f'BaseModel.destroy("{B_obj.id}")')
             output = fake_out.getvalue().strip()
             self.assertEqual('', output)
             self.assertNotIn(B_obj.id, storage.all())
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.console.onecmd('User.destroy("{}")'.format(U_obj.id))
+            self.console.onecmd(f'User.destroy("{U_obj.id}")')
             output = fake_out.getvalue().strip()
             self.assertEqual('', output)
             self.assertNotIn(U_obj.id, storage.all())
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.console.onecmd('State.destroy("{}")'.format(S_obj.id))
+            self.console.onecmd(f'State.destroy("{S_obj.id}")')
             output = fake_out.getvalue().strip()
             self.assertEqual('', output)
             self.assertNotIn(S_obj.id, storage.all())
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.console.onecmd('City.destroy("{}")'.format(C_obj.id))
+            self.console.onecmd(f'City.destroy("{C_obj.id}")')
             output = fake_out.getvalue().strip()
             self.assertEqual('', output)
             self.assertNotIn(C_obj.id, storage.all())
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.console.onecmd('Place.destroy("{}")'.format(P_obj.id))
+            self.console.onecmd(f'Place.destroy("{P_obj.id}")')
             output = fake_out.getvalue().strip()
             self.assertEqual('', output)
             self.assertNotIn(C_obj.id, storage.all())
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.console.onecmd('Review.destroy("{}")'.format(R_obj.id))
+            self.console.onecmd(f'Review.destroy("{R_obj.id}")')
             output = fake_out.getvalue().strip()
             self.assertEqual('', output)
             self.assertNotIn(C_obj.id, storage.all())
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.console.onecmd('Amenity.destroy("{}")'.format(A_obj.id))
+            self.console.onecmd(f'Amenity.destroy("{A_obj.id}")')
             output = fake_out.getvalue().strip()
             self.assertEqual('', output)
             self.assertNotIn(A_obj.id, storage.all())
