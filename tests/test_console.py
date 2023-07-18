@@ -365,10 +365,47 @@ class HBNBCommandTesCase(unittest.TestCase):
             self.assertEqual(obj.email, "airbnb.gmail.com")
             self.assertTrue(hasattr(obj, 'updated_at'))
         with patch('sys.stdout', new=StringIO()) as fake_out:
-            self.console.onecmd(f'BaseModel.update("{obj.id}" "email" "hbnb.gmail.com")')
+            cmnd = f'BaseModel.update("{obj.id}" "email" "hbnb.gmail.com")'
+            self.console.onecmd(cmnd)
             output = fake_out.getvalue().strip()
             self.assertEqual('', output)
             self.assertEqual(obj.email, "hbnb.gmail.com")
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            cmnd = f'User.update("{Uobj.id}" "email" "hbnb.gmail.com")'
+            self.console.onecmd(cmnd)
+            output = fake_out.getvalue().strip()
+            self.assertEqual('', output)
+            self.assertEqual(Uobj.email, "hbnb.gmail.com")
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            cmnd = f'State.update("{Sobj.id}" "email" "hbnb.gmail.com")'
+            self.console.onecmd(cmnd)
+            output = fake_out.getvalue().strip()
+            self.assertEqual('', output)
+            self.assertEqual(Sobj.email, "hbnb.gmail.com")
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            cmnd = f'City.update("{Cobj.id}" "email" "hbnb.gmail.com")'
+            self.console.onecmd(cmnd)
+            output = fake_out.getvalue().strip()
+            self.assertEqual('', output)
+            self.assertEqual(Cobj.email, "hbnb.gmail.com")
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            cmnd = f'Review.update("{Robj.id}" "email" "hbnb.gmail.com")'
+            self.console.onecmd(cmnd)
+            output = fake_out.getvalue().strip()
+            self.assertEqual('', output)
+            self.assertEqual(Robj.email, "hbnb.gmail.com")
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            cmnd = f'Place.update("{Pobj.id}" "email" "hbnb.gmail.com")'
+            self.console.onecmd(cmnd)
+            output = fake_out.getvalue().strip()
+            self.assertEqual('', output)
+            self.assertEqual(Pobj.email, "hbnb.gmail.com")
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            cmnd = f'Amenity.update("{Aobj.id}" "email" "hbnb.gmail.com")'
+            self.console.onecmd(cmnd)
+            output = fake_out.getvalue().strip()
+            self.assertEqual('', output)
+            self.assertEqual(Aobj.email, "hbnb.gmail.com")
 
     def test_update_non_existent(self):
         with patch('sys.stdout', new=StringIO()) as fake_out:
