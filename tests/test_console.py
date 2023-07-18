@@ -448,6 +448,12 @@ class HBNBCommandTesCase(unittest.TestCase):
             self.console.onecmd('update BaseModel {} email'.format(obj.id))
             output = fake_out.getvalue().strip()
             self.assertEqual(output, '** value missing **')
+    
+    def test_emptyline(self):
+        with patch('sys.stdout', new=StringIO()) as fake_out:
+            self.console.onecmd('')
+            output = fake_out.getvalue().strip()
+            self.assertEqual('', output)
 
 
 if __name__ == '__main__':
