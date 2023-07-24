@@ -1,5 +1,5 @@
 .filters {background-color: #FFFFFF; height: 70px;
-	  height: 70px; weight: 100%; border: 1px solid #DDDDDD;
+	  height: 70px; width: 100%; border: 1px solid #DDDDDD;
 	  border-radius: 4px;}
 
 .filters button {background-color: #FF5A5F; font-size: 18px;
