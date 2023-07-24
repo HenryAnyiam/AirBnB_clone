@@ -23,5 +23,9 @@
 .number_rooms {background-image: url("../images/icon_bed.png");}
 .number_bathrooms {background-image: url("../images/icon_bath.png");}
 
-.max_guest h4, .number_rooms h4, .number_bathrooms h4 { height: 15%; bottom: 0; text-align: center; 
-						float: bottom; display: inline;}
+.max_guest p, .number_rooms p, .number_bathrooms p {height: 15%; bottom: 0; text-align: center; 
+				float: bottom; display: inline-block; margin: 40px auto 0 -30px;}
+
+.user {text-align: left;}
+
+.description {text-align: left;}
