@@ -21,9 +21,9 @@
 	  border: 1px solid #DDDDDD; border-radius: 4px;
 	  margin: 20px auto auto auto;}
 
-.locations ul {margin: 20px;}
+.locations ul {margin: 2px auto 10px 20px;}
 
-.popover h2 {font-size: 16px; margin: 10px auto 2px -20px;}
+.popover h2 {font-size: 16px; margin: 10px auto 2px 20px;}
 
 .locations:hover .popover {display: block;}
 
